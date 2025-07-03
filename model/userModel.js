@@ -1,22 +1,29 @@
-
 const db = require('../db');
 
-exports.getAllUsers = callback => {
+const getAllUsers = callback => {
   db.query('SELECT * FROM users', callback);
 };
 
-exports.getUserById = (id, callback) => {
+const getUserById = (id, callback) => {
   db.query('SELECT * FROM users WHERE id = ?', [id], callback);
 };
 
-exports.createUser = (data, callback) => {
+const createUser = (data, callback) => {
   db.query('INSERT INTO users (name, email) VALUES (?, ?)', [data.name, data.email], callback);
 };
 
-exports.updateUser = (id, data, callback) => {
+const updateUser = (id, data, callback) => {
   db.query('UPDATE users SET name = ?, email = ? WHERE id = ?', [data.name, data.email, id], callback);
 };
 
-exports.deleteUser = (id, callback) => {
+const deleteUser = (id, callback) => {
   db.query('DELETE FROM users WHERE id = ?', [id], callback);
+};
+
+module.exports = {
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser
 };
